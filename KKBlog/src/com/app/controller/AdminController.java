@@ -49,6 +49,7 @@ public class AdminController {
 	@RequestMapping(value="/create" , method=RequestMethod.POST)
 	public String saveData(@ModelAttribute("adminDataModel")AdminDataModel adm,ModelMap m)
 	{
+		adm.setUserStatus("Active");
 		int userId = service.saveUser(adm);
 		String msg = "Registered User with id: "+userId+" Details: "+service.getUserById(userId);
 		m.addAttribute("msg", msg);
@@ -91,5 +92,20 @@ public class AdminController {
 			sblog.doPTD(id);
 			return "redirect:pendingapproval";
 		}
-
+	//================================================================
+		@RequestMapping(value="suspenduser",method=RequestMethod.GET)
+		public String suspendUsr(@RequestParam("userid")int id,ModelMap m)
+		{
+			service.suspendUser(id);
+			return "redirect:manageuser";
+		}
+		
+	//================================================================
+		@RequestMapping(value="reactuser",method=RequestMethod.GET)
+		public String reactiveUsr(@RequestParam("userid")int id,ModelMap m)
+		{
+			service.reactUsr(id);
+			return "redirect:manageuser";
+		}
+		
 }

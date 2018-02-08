@@ -18,30 +18,26 @@ public class BlogDaoImpl implements IBlogDao {
 
 	@Autowired
 	private HibernateTemplate ht;
-	
+
 	@Autowired
 	private SessionFactory sf;
 
-	@Override
 	public int saveBlog(BlogDataModel bdm) {
 		Serializable ob = ht.save(bdm);
 		int blogId = (Integer)ob;
 		return blogId;
 	}
 
-	@Override
 	public List<BlogDataModel> getAllBlogs() {
 		List<BlogDataModel> bloglist = ht.loadAll(BlogDataModel.class);
 		return bloglist;
 	}
 
-	@Override
 	public BlogDataModel getBlogById(int blogId) {
 		BlogDataModel bdm = ht.get(BlogDataModel.class, blogId);
 		return bdm;
 	}
 
-	@Override
 	public int deleteBlog(int blogId) {
 		BlogDataModel bdm = new BlogDataModel();
 		bdm.setBlogId(blogId);
@@ -49,62 +45,51 @@ public class BlogDaoImpl implements IBlogDao {
 		return blogId;
 	}
 
-	@Override
 	public int updateBlog(BlogDataModel bdm) {
 		ht.update(bdm);
 		return bdm.getBlogId();
 	}
 
-	@Override
 	public List<Object[]> getBlogArray() {
 		String hql = "select blogId,blogTitle,blogContent,blogStatus from com.app.model.BlogDataModel";
 		return ht.find(hql);
-
-
 	}
 
-	@Override
-	public void updateStatus(int id) {
+	public void updateStatus(int blogId) {
 		Session s = sf.openSession();
 		String sql = "update blog_table set bstatus='ReadyToPublish' where bid=?";
 		SQLQuery q = s.createSQLQuery(sql);
-		q.setParameter(0, id);
-		q.executeUpdate();
+		q.setParameter(0, blogId);
+		q.executeUpdate();		
 	}
 
-	@Override
 	public List<Object[]> getPendingBlog() {
 		String hql = "select blogId,blogTitle,blogStatus from com.app.model.BlogDataModel where blogStatus='ReadyToPublish'";
 		return ht.find(hql);
 	}
 
-	@Override
-	public void doPublish(int id) {
+	public void doPublish(int blogId) {
 		Session s = sf.openSession();
 		String sql = "update blog_table set bstatus='Publish' where bid=?";
 		SQLQuery q = s.createSQLQuery(sql);
-		q.setParameter(0, id);
-		q.executeUpdate();
+		q.setParameter(0, blogId);
+		q.executeUpdate();		
 	}
 
-	@Override
 	public void doReject(int blogId) {
 		Session s = sf.openSession();
 		String sql = "update blog_table set bstatus='Reject' where bid=?";
 		SQLQuery q = s.createSQLQuery(sql);
 		q.setParameter(0, blogId);
-		q.executeUpdate();
+		q.executeUpdate();		
 	}
 
-	@Override
 	public void doPTD(int blogId) {
 		Session s = sf.openSession();
 		String sql = "update blog_table set bstatus='Publish To Date' where bid=?";
 		SQLQuery q = s.createSQLQuery(sql);
 		q.setParameter(0, blogId);
 		q.executeUpdate();
-	}
-
-
-
+	}		
 }
+

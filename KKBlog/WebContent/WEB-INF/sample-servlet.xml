@@ -26,7 +26,7 @@
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.formate_sql">true</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				</props>
+			</props>
 		</property>
 		<property name="annotatedClasses">
 			<list>
@@ -43,7 +43,7 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		p:prefix="/WEB-INF/jsps/" p:suffix=".jsp" />
 
-	
+
 	<bean name="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="20971520" />

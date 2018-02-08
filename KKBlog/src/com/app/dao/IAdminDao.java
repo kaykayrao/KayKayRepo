@@ -13,5 +13,7 @@ public interface IAdminDao {
 	int updateUser(AdminDataModel adm);
 	List<Object[]> getUserArray();
 	String updateStatus(int userId);
+	void suspendUser(int userId);
+	void reactUsr(int userId);
 
 }

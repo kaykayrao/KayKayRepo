@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,15 +17,18 @@
 <a href="manageuser">View All Users</a><br>
 <table border="1">
 <tr>
-<td>UserId</td><td>UserName</td><td>UserPwd</td><td>Action Links</td>
+<td>UserId</td><td>UserName</td><td>UserPwd</td><td>UserStatus</td><td>Action Links</td>
 </tr>
 <c:forEach var="l" items="${msg}">
 <tr>
 <td><c:out value="${l[0]}"/></td>
 <td><c:out value="${l[1]}"/></td>
 <td><c:out value="${l[2]}"/></td>
+<td><c:out value="${l[3]}"/></td>
 <td>
 <a href='deleteuser?userid=<c:out value="${l[0]}"/>'>Delete User</a> | 
+<a href='suspenduser?userid=<c:out value="${l[0]}"/>'>Sespend User</a> |
+<a href='reactuser?userid=<c:out value="${l[0]}"/>'>Reactivate User</a>
 </td>
 </tr>
 </c:forEach>

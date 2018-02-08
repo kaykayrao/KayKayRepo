@@ -9,7 +9,7 @@
 <body>
 	<form action="update" method="post" enctype="multipart/form-data">
 		<pre>
-		<a href="http://localhost:2017/KKBlog/">Log Out</a><br>
+		<a href="editorout">Log Out</a><br>
 		<a href="editor">Back to Editor Home</a><br><br>
 		
 Blog Id:	<input type="text" name="blogId" value=${x } readonly/> 	

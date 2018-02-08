@@ -1,9 +1,13 @@
 package com.app.model;
 
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -25,9 +29,12 @@ public class AdminDataModel {
 	@Column(name="usrpwd")
 	private String userPwd;
 	
-	@OneToMany
-	@JoinColumn(name="blogIdFK")
-	private Set<BlogDataModel> blogs;
+	@Column(name="usrstatus")
+	private String userStatus;
+	
+	@OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinColumn(name="userIdFK")
+	private Collection<BlogDataModel> blogs = new LinkedHashSet<BlogDataModel>();
 
 	public int getUserId() {
 		return userId;
@@ -52,15 +59,29 @@ public class AdminDataModel {
 	public void setUserPwd(String userPwd) {
 		this.userPwd = userPwd;
 	}
+	
+	public String getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
+	}
 
 	@Override
 	public String toString() {
 		return "AdminDataModel [userId=" + userId + ", userName=" + userName
-				+ ", userPwd=" + userPwd + "]";
+				+ ", userPwd=" + userPwd + ", userStatus=" + userStatus
+				+ ", blogs=" + blogs + "]";
 	}
 
-	public Set<BlogDataModel> getBlogs() {
+
+	public Collection<BlogDataModel> getBlogs() {
 		return blogs;
+	}
+
+	public void setBlogs(Collection<BlogDataModel> blogs) {
+		this.blogs = blogs;
 	}
 
 	public void setBlogs(Set<BlogDataModel> blogs) {
