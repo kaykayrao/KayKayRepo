@@ -57,7 +57,7 @@ Required java Technologies:
 Run the application from Eclipse: 
 --------------------------------
 -Configure Tomcat-6 server in Eclipse.
--Right click on project (KKBlog) and select run as Java Application.
+-Right click on project (KKBlog) and select Run As -> Run On Server
 
 
 Access the application from browser:
